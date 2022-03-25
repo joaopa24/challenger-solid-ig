@@ -3,17 +3,21 @@ import { Request, Response } from "express";
 import { TurnUserAdminUseCase } from "./TurnUserAdminUseCase";
 
 class TurnUserAdminController {
-  constructor(private turnUserAdminUseCase: TurnUserAdminUseCase) {}
+    constructor(private turnUserAdminUseCase: TurnUserAdminUseCase) {}
 
-  handle(request: Request, response: Response): Response {
-    const { user_id } = request.params;
+    handle(request: Request, response: Response): Response {
+        try {
+            const { user_id } = request.params;
 
-    const user = this.turnUserAdminUseCase.execute({
-        user_id: String(user_id)
-    })
+            const user = this.turnUserAdminUseCase.execute({
+                user_id: String(user_id),
+            });
 
-    return response.status(201).json(user)
-  }
+            return response.status(201).json(user);
+        } catch (error) {
+            return response.status(404).send({error: error.message})
+        }
+    }
 }
 
 export { TurnUserAdminController };
