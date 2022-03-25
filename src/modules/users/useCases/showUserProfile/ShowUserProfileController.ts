@@ -12,9 +12,9 @@ class ShowUserProfileController {
                 user_id: String(user_id),
             });
 
-            return response.status(201).json(user);
+            return response.status(201).send(user);
         } catch (error) {
-            return response.status(200).json({ error: error.mensage})
+            return response.status(404).json({ error: error.message})
         }
     }
 }

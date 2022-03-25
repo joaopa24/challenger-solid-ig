@@ -15,6 +15,7 @@ class User {
      if(!this.admin){
          this.admin = false
      }
+     
    }
 }
 
