@@ -1,4 +1,4 @@
-import { Response, Request } from "express";
+import { Response, Request, json } from "express";
 
 import { CreateUserUseCase } from "./CreateUserUseCase";
 
@@ -8,9 +8,9 @@ class CreateUserController {
   handle(request: Request, response: Response): Response {
     const { email, name } = request.body;
 
-    this.createUserUseCase.execute({ email, name });
+    const user = this.createUserUseCase.execute({ email, name });
 
-    return response.status(201).send();
+    return response.status(201).send(user);
   }
 }
 
